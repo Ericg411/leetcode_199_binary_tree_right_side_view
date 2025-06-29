@@ -66,7 +66,7 @@ class TestRightSideView(unittest.TestCase):
         root.right = TreeNode(3)
         root.left.right = TreeNode(5)
         root.right.left = TreeNode(6)
-        self.assertEqual(self.sol.rightSideView(root), [1, 3, 5])
+        self.assertEqual(self.sol.rightSideView(root), [1, 3, 6])
 
 if __name__ == "__main__":
     unittest.main()

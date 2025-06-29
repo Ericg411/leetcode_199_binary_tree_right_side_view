@@ -10,27 +10,15 @@ class TreeNode:
 class Solution:
     def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
         result = []
-        left_depth = 0
-        right_depth = 0
-        current = root
 
-        def backtrack(current, depth, side): 
-            if current:
-                nonlocal left_depth, right_depth
-                if side == "right":
-                    if depth != right_depth or right_depth == 0:
-                        result.append(current.val)
-                    if depth >= right_depth:
-                        right_depth = depth
-                elif side == "left":
-                    if depth > left_depth:
-                        left_depth = depth
-                    if depth > right_depth:
-                        result.append(current.val)
+        def dfs(node, depth):
+            if not node:
+                return
+            if depth == len(result):
+                result.append(node.val)
+            dfs(node.right, depth + 1)
+            dfs(node.left, depth + 1)
 
-                backtrack(current.right, depth + 1, "right")
-                backtrack(current.left, depth + 1, "left")
         
-        backtrack(current, 0, "right")
-
+        dfs(root, 0)
         return result
